@@ -1,19 +1,45 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { createTheme, ThemeProvider, ThemeOptions } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  document.getElementById("root") as HTMLElement
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+export const queryClient = new QueryClient();
+
+const themeOptions: ThemeOptions = {
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#ffffff",
+    },
+    secondary: {
+      main: "rgba(255, 255, 255, 0.6)",
+      light: "rgba(255, 255, 255, 0.6)",
+    },
+    background: {
+      default: "#282828",
+      paper: "#282828",
+    },
+  },
+  breakpoints: {
+    values: { xs: 0, sm: 390, md: 900, lg: 1200, xl: 1536 },
+  },
+};
+
+const theme = createTheme(themeOptions);
+
+root.render(
+  <React.StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <App />
+      </ThemeProvider>
+    </QueryClientProvider>
+  </React.StrictMode>
+);
