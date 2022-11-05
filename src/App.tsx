@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from "react";
-import { Container, Box, Typography } from "@mui/material";
+import { createContext, useState } from "react";
+import { Container } from "@mui/material";
 import Header from "./components/Header/Header";
 import TodayTasks from "./components/TodayTasks/TodayTasks";
 import NewsLine from "./components/NewsLine";
